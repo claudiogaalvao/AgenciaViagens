@@ -3,4 +3,16 @@
     <string name="especiais">Especiais</string>
     <string name="pais">Brasil</string>
     <string name="descricao_banner_pacotes_viagem">Banner da lista de pacotes de viagem</string>
+    <string name="preco_final">Preço final:</string>
+    <string name="realizar_pagamento">Realizar Pagamento</string>
+    <string name="imagem_do_pacote">Imagem do pacote</string>
+    <string name="mes_vencimento">MM</string>
+    <string name="numero_cartao">Número do cartão</string>
+    <string name="valor_compra">Valor da compra:</string>
+    <string name="orientacao_pagamento">Digite as informações do cartão de crédito que você deseja usar para o pagamento</string>
+    <string name="ano_vencimento">AA</string>
+    <string name="cvc">CVC</string>
+    <string name="nome_cartao">Nome no cartão</string>
+    <string name="botao_finalizar_compra">Finalizar Compra</string>
+    <string name="mascara_nome_cartao">abcdefghijklmnopqrstuvwxyzçãABCDEFGHIJKLMNOPQRSTUVWXYZÇÃ\u0020</string>
 </resources>
