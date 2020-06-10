@@ -14,6 +14,8 @@ import br.com.claudiogalvao.agenciaviagens.R;
 import br.com.claudiogalvao.agenciaviagens.model.Pacote;
 import br.com.claudiogalvao.agenciaviagens.util.MoedaUtil;
 
+import static br.com.claudiogalvao.agenciaviagens.ui.activity.PacoteActivityConstantes.CHAVE_PACOTE;
+
 public class PagamentoActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Pagamento";
@@ -24,19 +26,32 @@ public class PagamentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pagamento);
         setTitle(TITULO_APPBAR);
 
-        Pacote pacoteSaoPaulo = new Pacote("São Paulo", "sao_paulo_sp",
-                2, new BigDecimal("243.99"));
+        carregaPacoteRecebido();
+    }
 
-        mostraPreco(pacoteSaoPaulo);
+    private void carregaPacoteRecebido() {
+        Intent intent = getIntent();
+        if(intent.hasExtra(CHAVE_PACOTE)) {
+            final Pacote pacote = (Pacote) intent.getSerializableExtra(CHAVE_PACOTE);
+            mostraPreco(pacote);
+            configuraBotaoFinalizaCompra(pacote);
+        }
+    }
 
+    private void configuraBotaoFinalizaCompra(final Pacote pacote) {
         Button botaoFinalizaCompra = findViewById(R.id.pagamento_botao_finaliza_compra);
         botaoFinalizaCompra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PagamentoActivity.this, ResumoCompraActivity.class);
-                startActivity(intent);
+                vaiParaResumoCompra(pacote);
             }
         });
+    }
+
+    private void vaiParaResumoCompra(Pacote pacote) {
+        Intent intent = new Intent(PagamentoActivity.this, ResumoCompraActivity.class);
+        intent.putExtra(CHAVE_PACOTE, pacote);
+        startActivity(intent);
     }
 
     private void mostraPreco(Pacote pacote) {

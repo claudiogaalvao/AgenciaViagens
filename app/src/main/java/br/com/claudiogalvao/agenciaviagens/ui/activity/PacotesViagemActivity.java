@@ -15,6 +15,8 @@ import br.com.claudiogalvao.agenciaviagens.dao.PacoteDAO;
 import br.com.claudiogalvao.agenciaviagens.model.Pacote;
 import br.com.claudiogalvao.agenciaviagens.ui.adapter.ListaPacotesAdapter;
 
+import static br.com.claudiogalvao.agenciaviagens.ui.activity.PacoteActivityConstantes.CHAVE_PACOTE;
+
 public class PacotesViagemActivity extends AppCompatActivity {
 
     @Override
@@ -28,15 +30,21 @@ public class PacotesViagemActivity extends AppCompatActivity {
     }
 
     private void configuraLista() {
-        List<Pacote> pacotes = new PacoteDAO().lista();
+        final List<Pacote> pacotes = new PacoteDAO().lista();
         ListView listaPacotes = findViewById(R.id.activity_pacotes_viagem_listview);
         listaPacotes.setAdapter(new ListaPacotesAdapter(pacotes, this));
         listaPacotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PacotesViagemActivity.this, ResumoPacoteActivity.class);
-                startActivity(intent);
+                vaiParaResumoPacote(position, pacotes);
             }
         });
+    }
+
+    private void vaiParaResumoPacote(int position, List<Pacote> pacotes) {
+        Intent intent = new Intent(PacotesViagemActivity.this,
+                ResumoPacoteActivity.class);
+        intent.putExtra(CHAVE_PACOTE, pacotes.get(position));
+        startActivity(intent);
     }
 }

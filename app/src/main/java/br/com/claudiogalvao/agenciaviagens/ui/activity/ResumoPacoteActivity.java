@@ -20,6 +20,8 @@ import br.com.claudiogalvao.agenciaviagens.util.DiasUtil;
 import br.com.claudiogalvao.agenciaviagens.util.MoedaUtil;
 import br.com.claudiogalvao.agenciaviagens.util.ResourcesUtil;
 
+import static br.com.claudiogalvao.agenciaviagens.ui.activity.PacoteActivityConstantes.CHAVE_PACOTE;
+
 public class ResumoPacoteActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Resumo do pacote";
@@ -30,26 +32,41 @@ public class ResumoPacoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resumo_pacote);
         setTitle(TITULO_APPBAR);
 
-        Pacote pacoteSaoPaulo = new Pacote("São Paulo", "sao_paulo_sp",
-                2, new BigDecimal("243.99"));
+        carregaPacoteRecebido();
 
-        mostraLocal(pacoteSaoPaulo);
-        mostraImagem(pacoteSaoPaulo);
-        mostraDias(pacoteSaoPaulo);
-        mostraPreco(pacoteSaoPaulo);
-        mostraData(pacoteSaoPaulo);
+    }
 
+    private void carregaPacoteRecebido() {
+        Intent intent = getIntent();
+        if(intent.hasExtra(CHAVE_PACOTE)) {
+            final Pacote pacote = (Pacote) intent.getSerializableExtra(CHAVE_PACOTE);
+            inicializaCampos(pacote);
+            configuraBotaoRealizaPagamento(pacote);
+        }
+    }
 
-
+    private void configuraBotaoRealizaPagamento(final Pacote pacote) {
         Button botaoRealizaPagamento = findViewById(R.id.activity_resumo_pacote_botao_realiza_pagamento);
         botaoRealizaPagamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResumoPacoteActivity.this, PagamentoActivity.class);
-                startActivity(intent);
+                vaiParaPagamento(pacote);
             }
         });
+    }
 
+    private void vaiParaPagamento(Pacote pacote) {
+        Intent intent = new Intent(ResumoPacoteActivity.this, PagamentoActivity.class);
+        intent.putExtra(CHAVE_PACOTE, pacote);
+        startActivity(intent);
+    }
+
+    private void inicializaCampos(Pacote pacote) {
+        mostraLocal(pacote);
+        mostraImagem(pacote);
+        mostraDias(pacote);
+        mostraPreco(pacote);
+        mostraData(pacote);
     }
 
     private void mostraData(Pacote pacoteSaoPaulo) {
