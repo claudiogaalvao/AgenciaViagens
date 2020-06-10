@@ -15,4 +15,9 @@
     <string name="nome_cartao">Nome no cartão</string>
     <string name="botao_finalizar_compra">Finalizar Compra</string>
     <string name="mascara_nome_cartao">abcdefghijklmnopqrstuvwxyzçãABCDEFGHIJKLMNOPQRSTUVWXYZÇÃ\u0020</string>
+    <string name="mensagem_parabens">Parabéns!</string>
+    <string name="mensagem_sucesso_compra">Compra realiza com sucesso :)</string>
+    <string name="resumo_compra">Confira o resumo da compra:</string>
+    <string name="descricao_label_resumo_compra">Banner laranja para impacto visual</string>
+    <string name="descricao_imagem_resumo_compra">Imagem da cidade destino</string>
 </resources>
